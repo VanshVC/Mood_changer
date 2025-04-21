@@ -3,7 +3,7 @@ import numpy as np
 import streamlit as st
 import cv2
 import pandas as pd
-
+import os
 from collections import Counter
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten
@@ -11,9 +11,10 @@ from tensorflow.keras.layers import Conv2D
 from tensorflow.keras.layers import MaxPooling2D
 import base64
 
+# Use relative paths
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
-
-df = pd.read_csv("D:\\INTERNSHIP\\sem4\\Emotion-based-music-recommendation-system-main\\Emotion-based-music-recommendation-system-main\\muse_v3.csv")
+df = pd.read_csv(os.path.join(current_dir, "muse_v3.csv"))
 
 df['link'] = df['lastfm_url']
 df['name'] = df['track']
@@ -160,7 +161,7 @@ model.add(Dropout(0.5))
 model.add(Dense(7, activation='softmax'))
 
 
-model.load_weights('D:\\INTERNSHIP\\sem4\\Emotion-based-music-recommendation-system-main\\Emotion-based-music-recommendation-system-main\\model.h5')
+model.load_weights(os.path.join(current_dir, 'model.h5'))
 
 emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised"}
 
@@ -169,7 +170,8 @@ cv2.ocl.setUseOpenCL(False)
 cap = cv2.VideoCapture(0)
 
 print("Loading Haarcascade Classifier...")
-face = cv2.CascadeClassifier('D:\\INTERNSHIP\\sem4\\Emotion-based-music-recommendation-system-main\\Emotion-based-music-recommendation-system-main\\haarcascade_frontalface_default.xml')
+haarcascade_path = os.path.join(current_dir, 'haarcascade_frontalface_default.xml')
+face = cv2.CascadeClassifier(haarcascade_path)
 if face.empty():
     print("Haarcascade Classifier failed to load.")
 else:
@@ -206,7 +208,7 @@ with col2:
             if not ret:
                 break
             
-            face = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")          
+            face = cv2.CascadeClassifier(haarcascade_path)          
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)        
             faces = face.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)          
             count = count + 1

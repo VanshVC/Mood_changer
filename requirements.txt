@@ -1,8 +1,8 @@
-streamlit
-numpy
-pandas
-opencv-python
-opencv-python-headless
-tensorflow
-keras
-collection
+streamlit==1.24.0
+numpy==1.24.3
+pandas==2.0.3
+opencv-python==4.7.0.72
+opencv-python-headless==4.7.0.72
+tensorflow==2.10.0
+keras==2.10.0
+collections-extended==1.0.3
