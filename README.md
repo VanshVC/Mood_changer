@@ -41,7 +41,7 @@ https://github.com/Hiralsathwara/Emotion-based-music-recommendation-system/asset
 
 ## Authors
 
-- [HIRAL SATHWARA](https://github.com/Hiralsathwara)
+- [Vansh_Chhalotre](https://github.com/VanshVC)
 
 
 
